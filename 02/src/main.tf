@@ -2,7 +2,7 @@ resource "yandex_vpc_network" "develop" {
   name = var.vpc_name
 }
 resource "yandex_vpc_subnet" "develop" {
-  name           = var.vpc_name
+  name           = "${var.vpc_name}-subnet"
   zone           = var.default_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr
@@ -14,10 +14,10 @@ data "yandex_compute_image" "ubuntu" {
 }
 resource "yandex_compute_instance" "platform" {
   name        = "netology-develop-platform-web"
-  platform_id = "standart-v4"
+  platform_id = "standard-v1"
   resources {
-    cores         = 1
-    memory        = 1
+    cores         = 2
+    memory        = 2
     core_fraction = 5
   }
   boot_disk {
@@ -35,7 +35,8 @@ resource "yandex_compute_instance" "platform" {
 
   metadata = {
     serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    ##ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    ssh-keys = "ubuntu:${file("~/.ssh/woland2.pub")}"
   }
 
 }
