@@ -133,6 +133,7 @@ name = "${var.vpc_name}-subnet"
 
 ## Решение 5
 
+![img6](img/img6.png)
 
 ## Задание 6
 
