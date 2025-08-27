@@ -30,3 +30,31 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+# variables.tf (дополнение)
+variable "each_vm" {
+  type = list(object({
+    vm_name      = string
+    cpu          = number
+    ram          = number
+    disk_volume  = number
+    platform_id  = optional(string, "standard-v1")
+    image_id     = optional(string, "fd87va5cc00gaqnb7gpi") # Ubuntu 20.04
+    zone         = optional(string, var.default_zone)
+  }))
+  description = "Список ВМ для баз данных с разными параметрами"
+  default = [
+    {
+      vm_name     = "main"
+      cpu         = 4
+      ram         = 4
+      disk_volume = 20
+    },
+    {
+      vm_name     = "replica"
+      cpu         = 2
+      ram         = 2
+      disk_volume = 15
+    }
+  ]
+}
