@@ -1,4 +1,4 @@
-###cloud vars
+### Cloud vars
 variable "token" {
   type        = string
   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
@@ -19,6 +19,7 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -28,10 +29,10 @@ variable "default_cidr" {
 variable "vpc_name" {
   type        = string
   default     = "develop"
-  description = "VPC network&subnet name"
+  description = "VPC network & subnet name"
 }
 
-# variables.tf (дополнение)
+# Переменная для for_each-vm.tf — без поля zone
 variable "each_vm" {
   type = list(object({
     vm_name      = string
@@ -39,8 +40,8 @@ variable "each_vm" {
     ram          = number
     disk_volume  = number
     platform_id  = optional(string, "standard-v1")
-    image_id     = optional(string, "fd87va5cc00gaqnb7gpi") # Ubuntu 20.04
-    zone         = optional(string, var.default_zone)
+    image_id     = optional(string, "fd8hjrk74m4jvmvl5gi6") # Ubuntu 20.04 LTS
+    # zone больше не здесь — задаётся через var.default_zone
   }))
   description = "Список ВМ для баз данных с разными параметрами"
   default = [

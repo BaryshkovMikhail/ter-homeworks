@@ -1,17 +1,13 @@
 # for_each-vm.tf
 # Создание ВМ main и replica с разными параметрами через for_each
 
-locals {
-  ssh_public_key = file("~/.ssh/id_rsa.pub")
-}
-
 resource "yandex_compute_instance" "db" {
   for_each = { for vm in var.each_vm : vm.vm_name => vm }
 
   name        = each.value.vm_name
-  zone        = each.value.zone
+  zone        = var.default_zone          # Централизованно из variables.tf
   folder_id   = var.folder_id
-  platform_id = each.value.platform_id
+  platform_id = lookup(each.value, "platform_id", "standard-v1")
 
   resources {
     cores  = each.value.cpu
@@ -21,7 +17,7 @@ resource "yandex_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      image_id = each.value.image_id
+      image_id = lookup(each.value, "image_id", "fd8hjrk74m4jvmvl5gi6")
       type     = "network-hdd"
       size     = each.value.disk_volume
     }
