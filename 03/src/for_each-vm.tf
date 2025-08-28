@@ -1,24 +1,21 @@
 # for_each-vm.tf
-# Создание ВМ main и replica с разными параметрами через for_each
-
 resource "yandex_compute_instance" "db" {
   for_each = { for vm in var.each_vm : vm.vm_name => vm }
 
   name        = each.value.vm_name
-  zone        = var.default_zone          # Централизованно из variables.tf
+  zone        = var.default_zone
   folder_id   = var.folder_id
-  platform_id = lookup(each.value, "platform_id", "standard-v1")
+  platform_id = lookup(each.value, "platform_id", var.default_platform_id)
 
   resources {
     cores  = each.value.cpu
     memory = each.value.ram
-    core_fraction = 20
   }
 
   boot_disk {
     initialize_params {
-      image_id = lookup(each.value, "image_id", "fd8hjrk74m4jvmvl5gi6")
-      type     = "network-hdd"
+      image_id = var.ubuntu_2004_image_id  # ← Прямое использование переменной
+      type     = var.default_disk_type
       size     = each.value.disk_volume
     }
   }

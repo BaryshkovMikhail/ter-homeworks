@@ -1,10 +1,7 @@
 # ansible.tf
-# Генерация динамического Ansible inventory-файла
+# Генерация динамического Ansible inventory
 
 locals {
-  # Собираем данные о ВМ для передачи в шаблон
-
-  # ВМ web-1, web-2 (созданы через count → это список)
   webservers = [
     for vm in yandex_compute_instance.web :
     {
@@ -14,7 +11,6 @@ locals {
     }
   ]
 
-  # ВМ main, replica (созданы через for_each → это map)
   databases = [
     for name, vm in yandex_compute_instance.db :
     {
@@ -24,7 +20,6 @@ locals {
     }
   ]
 
-  # Одиночная ВМ storage
   storage = [
     {
       name        = yandex_compute_instance.storage.name
@@ -33,7 +28,6 @@ locals {
     }
   ]
 
-  # Генерация содержимого inventory
   ansible_inventory = templatefile("${path.module}/inventory.tpl", {
     webservers = local.webservers
     databases  = local.databases
@@ -41,7 +35,6 @@ locals {
   })
 }
 
-# Запись inventory в файл
 resource "local_file" "ansible_inventory" {
   filename = "inventory"
   content  = local.ansible_inventory

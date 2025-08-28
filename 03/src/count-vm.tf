@@ -7,7 +7,7 @@ resource "yandex_compute_instance" "web" {
   name        = "web-${count.index + 1}"
   zone        = var.default_zone
   folder_id   = var.folder_id
-  platform_id = "standard-v1"
+  platform_id = var.default_platform_id
 
   resources {
     cores         = 2
@@ -17,8 +17,9 @@ resource "yandex_compute_instance" "web" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8hjrk74m4jvmvl5gi6"
-      type     = "network-hdd"
+      ##image_id = data.yandex_compute_image.ubuntu_2004.id
+      image_id = var.ubuntu_2004_image_id
+      type     = var.default_disk_type
       size     = 10
     }
   }
@@ -33,7 +34,6 @@ resource "yandex_compute_instance" "web" {
     ssh-keys = "ubuntu:${local.ssh_public_key}"
   }
 
-  # Зависимость: web создаются ПОСЛЕ db
   depends_on = [
     yandex_compute_instance.db
   ]

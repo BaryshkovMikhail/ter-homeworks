@@ -1,5 +1,5 @@
 # inventory.tpl
-# Шаблон для динамического Ansible inventory
+# Шаблон для Ansible inventory
 
 [webservers]
 %{ for vm in webservers ~}

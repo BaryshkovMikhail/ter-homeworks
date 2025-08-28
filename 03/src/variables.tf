@@ -32,16 +32,34 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-# Переменная для for_each-vm.tf — без поля zone
+variable "default_disk_type" {
+  type        = string
+  default     = "network-hdd"
+  description = "Тип диска по умолчанию: network-hdd, network-ssd, network-ssd-nonreplicated"
+}
+
+variable "ubuntu_2004_image_id" {
+  type        = string
+  description = "ID образа Ubuntu 20.04 LTS для ВМ"
+  default     = "fd8hjrk74m4jvmvl5gi6"  # рабочий image_id
+}
+
+# Платформа по умолчанию
+variable "default_platform_id" {
+  type        = string
+  default     = "standard-v1"
+  description = "Тип платформы ВМ по умолчанию: standard-v1, burstable-v1 и др."
+}
+
+# Переменная для for_each-vm.tf — без zone и с опциональным image_id/platform_id
 variable "each_vm" {
   type = list(object({
     vm_name      = string
     cpu          = number
     ram          = number
     disk_volume  = number
-    platform_id  = optional(string, "standard-v1")
-    image_id     = optional(string, "fd8hjrk74m4jvmvl5gi6") # Ubuntu 20.04 LTS
-    # zone больше не здесь — задаётся через var.default_zone
+    platform_id  = optional(string)
+    image_id     = optional(string)
   }))
   description = "Список ВМ для баз данных с разными параметрами"
   default = [
@@ -50,6 +68,7 @@ variable "each_vm" {
       cpu         = 4
       ram         = 4
       disk_volume = 20
+      platform_id = "standard-v1"
     },
     {
       vm_name     = "replica"

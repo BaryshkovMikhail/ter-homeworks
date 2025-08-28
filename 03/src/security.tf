@@ -1,3 +1,6 @@
+# security.tf
+# Группа безопасности
+
 variable "security_group_ingress" {
   description = "secrules ingress"
   type = list(object(
@@ -18,7 +21,7 @@ variable "security_group_ingress" {
     },
     {
       protocol       = "TCP"
-      description    = "разрешить входящий  http"
+      description    = "разрешить входящий http"
       v4_cidr_blocks = ["0.0.0.0/0"]
       port           = 80
     },
@@ -30,7 +33,6 @@ variable "security_group_ingress" {
     },
   ]
 }
-
 
 variable "security_group_egress" {
   description = "secrules egress"
@@ -49,11 +51,10 @@ variable "security_group_egress" {
       description    = "разрешить весь исходящий трафик"
       v4_cidr_blocks = ["0.0.0.0/0"]
       from_port      = 0
-      to_port        = 65365
+      to_port        = 65535
     }
   ]
 }
-
 
 resource "yandex_vpc_security_group" "example" {
   name       = "example_dynamic"

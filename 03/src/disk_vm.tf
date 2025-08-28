@@ -1,23 +1,21 @@
 # disk_vm.tf
-# Создание 3 одинаковых виртуальных дисков и ВМ "storage" с подключением дисков через dynamic secondary_disk
+# Создание 3 дисков и ВМ storage с подключением через dynamic secondary_disk
 
-# Создание 3 дополнительных дисков по 1 Гб
 resource "yandex_compute_disk" "additional" {
   count = 3
 
   name        = "disk-${count.index + 1}"
   folder_id   = var.folder_id
   zone        = var.default_zone
-  type        = "network-hdd"
+  type        = var.default_disk_type
   size        = 1
 }
 
-# Создание одиночной ВМ с именем "storage"
 resource "yandex_compute_instance" "storage" {
   name        = "storage"
   folder_id   = var.folder_id
   zone        = var.default_zone
-  platform_id = "standard-v1"
+  platform_id = var.default_platform_id
 
   resources {
     cores  = 2
@@ -26,8 +24,9 @@ resource "yandex_compute_instance" "storage" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8hjrk74m4jvmvl5gi6"  # Ubuntu 20.04 LTS (из предыдущих заданий)
-      type     = "network-hdd"
+      ##image_id = data.yandex_compute_image.ubuntu_2004.id
+      image_id = var.ubuntu_2004_image_id
+      type     = var.default_disk_type
       size     = 10
     }
   }
@@ -42,7 +41,6 @@ resource "yandex_compute_instance" "storage" {
     ssh-keys = "ubuntu:${local.ssh_public_key}"
   }
 
-  # Подключение дополнительных дисков через dynamic и for_each
   dynamic "secondary_disk" {
     for_each = yandex_compute_disk.additional[*].id
     content {
