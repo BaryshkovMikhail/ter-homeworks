@@ -1,0 +1,15 @@
+# inventory.tpl
+# Шаблон для Ansible inventory
+
+[webservers]
+web-1 ansible_host=89.169.145.91 fqdn=fhmd6tqaojcbmpdsgehc.auto.internal
+web-2 ansible_host=158.160.60.146 fqdn=fhmddsi14sjhrdrldjru.auto.internal
+
+
+[databases]
+main ansible_host=89.169.149.136 fqdn=fhm32h7dc8d4hvpjdp0g.auto.internal
+replica ansible_host=158.160.98.128 fqdn=fhm4v299vjab605ebcnf.auto.internal
+
+
+[storage]
+storage ansible_host=89.169.145.28 fqdn=fhmrh8nh8kcr4pj1p1v8.auto.internal

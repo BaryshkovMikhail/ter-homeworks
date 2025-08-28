@@ -38,11 +38,11 @@ variable "default_disk_type" {
   description = "Тип диска по умолчанию: network-hdd, network-ssd, network-ssd-nonreplicated"
 }
 
-variable "ubuntu_2004_image_id" {
-  type        = string
-  description = "ID образа Ubuntu 20.04 LTS для ВМ"
-  default     = "fd8hjrk74m4jvmvl5gi6"  # рабочий image_id
-}
+#variable "ubuntu_2004_image_id" {
+#  type        = string
+#  description = "ID образа Ubuntu 20.04 LTS для ВМ"
+#  default     = "fd8hjrk74m4jvmvl5gi6"  # рабочий image_id
+#}
 
 # Платформа по умолчанию
 variable "default_platform_id" {

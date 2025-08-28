@@ -24,8 +24,8 @@ resource "yandex_compute_instance" "storage" {
 
   boot_disk {
     initialize_params {
-      ##image_id = data.yandex_compute_image.ubuntu_2004.id
-      image_id = var.ubuntu_2004_image_id
+      image_id = data.yandex_compute_image.ubuntu_2004.id
+      #image_id = var.ubuntu_2004_image_id
       type     = var.default_disk_type
       size     = 10
     }
@@ -47,6 +47,10 @@ resource "yandex_compute_instance" "storage" {
       disk_id = secondary_disk.value
     }
   }
+  # Явная зависимость от data
+  depends_on = [
+    data.yandex_compute_image.ubuntu_2004
+  ]
 
   lifecycle {
     create_before_destroy = true

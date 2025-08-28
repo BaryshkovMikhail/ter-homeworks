@@ -17,8 +17,8 @@ resource "yandex_compute_instance" "web" {
 
   boot_disk {
     initialize_params {
-      ##image_id = data.yandex_compute_image.ubuntu_2004.id
-      image_id = var.ubuntu_2004_image_id
+      image_id = data.yandex_compute_image.ubuntu_2004.id
+      #image_id = var.ubuntu_2004_image_id
       type     = var.default_disk_type
       size     = 10
     }
