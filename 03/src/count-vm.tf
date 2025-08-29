@@ -1,8 +1,6 @@
 # count-vm.tf
-# Создание ВМ web-1 и web-2 через count
-
 resource "yandex_compute_instance" "web" {
-  count = 2
+  count = var.web_count  
 
   name        = "web-${count.index + 1}"
   zone        = var.default_zone
@@ -10,17 +8,16 @@ resource "yandex_compute_instance" "web" {
   platform_id = var.default_platform_id
 
   resources {
-    cores         = 2
-    memory        = 2
-    core_fraction = 5
+    cores         = var.web_cpu
+    memory        = var.web_ram
+    core_fraction = var.web_core_fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu_2004.id
-      #image_id = var.ubuntu_2004_image_id
       type     = var.default_disk_type
-      size     = 10
+      size     = var.web_boot_disk_size  
     }
   }
 

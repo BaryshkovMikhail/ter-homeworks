@@ -1,6 +1,4 @@
 # inventory.tpl
-# Шаблон для Ansible inventory
-
 [webservers]
 %{ for vm in webservers ~}
 ${vm.name} ansible_host=${vm.external_ip} fqdn=${vm.fqdn}

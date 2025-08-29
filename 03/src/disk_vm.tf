@@ -1,14 +1,12 @@
 # disk_vm.tf
-# Создание 3 дисков и ВМ storage с подключением через dynamic secondary_disk
-
 resource "yandex_compute_disk" "additional" {
-  count = 3
+  count = var.storage_disk_count  
 
   name        = "disk-${count.index + 1}"
   folder_id   = var.folder_id
   zone        = var.default_zone
   type        = var.default_disk_type
-  size        = 1
+  size        = var.storage_secondary_disk_size  
 }
 
 resource "yandex_compute_instance" "storage" {
@@ -18,16 +16,16 @@ resource "yandex_compute_instance" "storage" {
   platform_id = var.default_platform_id
 
   resources {
-    cores  = 2
-    memory = 2
+    cores         = var.storage_cpu
+    memory        = var.storage_ram
+    core_fraction = var.storage_core_fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu_2004.id
-      #image_id = var.ubuntu_2004_image_id
       type     = var.default_disk_type
-      size     = 10
+      size     = var.storage_boot_disk_size  
     }
   }
 
@@ -47,10 +45,6 @@ resource "yandex_compute_instance" "storage" {
       disk_id = secondary_disk.value
     }
   }
-  # Явная зависимость от data
-  depends_on = [
-    data.yandex_compute_image.ubuntu_2004
-  ]
 
   lifecycle {
     create_before_destroy = true

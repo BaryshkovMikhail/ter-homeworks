@@ -1,6 +1,4 @@
 # ansible.tf
-# Генерация динамического Ansible inventory
-
 locals {
   webservers = [
     for vm in yandex_compute_instance.web :
