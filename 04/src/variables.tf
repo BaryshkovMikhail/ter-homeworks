@@ -19,6 +19,7 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -32,10 +33,9 @@ variable "vpc_name" {
 }
 
 ###common vars
-
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "your_ssh_ed25519_key"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5fK+g2KVk8M7DcnxENYKsmnx4J4ryLHjCJeMwjf3fZ m.baryshkov@mail.ru"
   description = "ssh-keygen -t ed25519"
 }
 
@@ -52,6 +52,3 @@ variable "vm_db_name" {
   default     = "netology-develop-platform-db"
   description = "example vm_db_ prefix"
 }
-
-
-
