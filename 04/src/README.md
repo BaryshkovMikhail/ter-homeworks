@@ -51,3 +51,17 @@ module "vpc_dev" {
 3. Полностью удалите из стейта модуль vm.
 4. Импортируйте всё обратно. Проверьте terraform plan. Значимых(!!) изменений быть не должно.
 Приложите список выполненных команд и скриншоты процессы.
+
+
+## Решение 3
+
+![img10](img/img10.png)
+![img11](img/img11.png)
+![img12](img/img12.png)
+![img13](img/img13.png)
+![img14](img/img14.png)
+![img15](img/img15.png)
+![img16](img/img16.png)
+![img17](img/img17.png)
+![img18](img/img18.png)
+![img19](img/img19.png)
