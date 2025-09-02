@@ -119,3 +119,14 @@ Checkov обнаружил строку с высокой энтропией (п
 4. Откройте в проекте terraform console, а в другом окне из этой же директории попробуйте запустить terraform apply.
 5. Пришлите ответ об ошибке доступа к state.
 6. Принудительно разблокируйте state. Пришлите команду и вывод.
+
+
+## Решение 2
+![img9](img/img9.png)
+![img10](img/img10.png)
+![img11](img/img11.png)
+![img12](img/img12.png)
+![img13](img/img13.png)
+![img14](img/img14.png)
+![img15](img/img15.png)
+![img16](img/img16.png)
