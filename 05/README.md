@@ -142,3 +142,5 @@ Checkov обнаружил строку с высокой энтропией (п
 ## Решение 3
 ![img17](img/img17.png)
 ![img18](img/img18.png)
+
+[Pull requests](https://github.com/BaryshkovMikhail/ter-homeworks/pull/1)
