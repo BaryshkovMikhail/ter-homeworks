@@ -10,7 +10,7 @@ module "vpc_dev" {
 
 # ВМ для marketing
 module "marketing_vm" {
-  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=7020e1fc51e53485c9fc06bffff199970cb68234"
 
   providers = {
     yandex = yandex  # ← Явно передаём провайдер из root module
@@ -39,7 +39,7 @@ module "marketing_vm" {
 
 # ВМ для analytics
 module "analytics_vm" {
-  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=7020e1fc51e53485c9fc06bffff199970cb68234"
 
   providers = {
     yandex = yandex
