@@ -39,6 +39,34 @@ variable "vms_ssh_root_key" {
   description = "ssh-keygen -t ed25519"
 }
 
+variable "ip_address" {
+  type        = string
+  description = "IP-адрес"
+
+  validation {
+    condition = can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", var.ip_address))
+    error_message = "Значение '${var.ip_address}' не является валидным IPv4-адресом."
+  }
+
+  default = "192.168.0.1"           # ✅ валидный
+  #default = "1920.1680.0.1"       # ❌ невалидный
+}
+
+variable "ip_list" {
+  type        = list(string)
+  description = "Список IP-адресов"
+
+  validation {
+    condition = alltrue([
+      for ip in var.ip_list : can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", ip))
+    ])
+    error_message = "Один или несколько IP-адресов в списке невалидны. Убедитесь, что все адреса соответствуют формату x.x.x.x (0-255)."
+  }
+
+  default = ["192.168.0.1", "1.1.1.1", "127.0.0.1"]     # ✅ валидный
+  #default = ["192.168.0.1", "1.1.1.1", "1270.0.0.1"]  # ❌ с ошибкой
+}
+
 ###example vm_web var
 #variable "vm_web_name" {
 #  type        = string
