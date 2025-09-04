@@ -130,3 +130,29 @@ Checkov обнаружил строку с высокой энтропией (п
 ![img14](img/img14.png)
 ![img15](img/img15.png)
 ![img16](img/img16.png)
+
+## Задание 3  
+
+1. Сделайте в GitHub из ветки 'terraform-05' новую ветку 'terraform-hotfix'.
+2. Проверье код с помощью tflint и checkov, исправьте все предупреждения и ошибки в 'terraform-hotfix', сделайте коммит.
+3. Откройте новый pull request 'terraform-hotfix' --> 'terraform-05'. 
+4. Вставьте в комментарий PR результат анализа tflint и checkov, план изменений инфраструктуры из вывода команды terraform plan.
+5. Пришлите ссылку на PR для ревью. Вливать код в 'terraform-05' не нужно.
+
+## Решение 3
+![img17](img/img17.png)
+![img18](img/img18.png)
+
+[Pull requests](https://github.com/BaryshkovMikhail/ter-homeworks/pull/1)
+
+## Задание 4
+
+1. Напишите переменные с валидацией и протестируйте их, заполнив default верными и неверными значениями. Предоставьте скриншоты проверок из terraform console. 
+
+- type=string, description="ip-адрес" — проверка, что значение переменной содержит верный IP-адрес с помощью функций cidrhost() или regex(). Тесты:  "192.168.0.1" и "1920.1680.0.1";
+- type=list(string), description="список ip-адресов" — проверка, что все адреса верны. Тесты:  ["192.168.0.1", "1.1.1.1", "127.0.0.1"] и ["192.168.0.1", "1.1.1.1", "1270.0.0.1"].
+
+## Решение 4
+![img19](img/img19.png)
+![img20](img/img20.png)
+![img21](img/img21.png)

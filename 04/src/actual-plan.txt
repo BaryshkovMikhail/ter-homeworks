@@ -1,0 +1,231 @@
+[0m[1mmodule.marketing_vm.data.yandex_compute_image.my_image: Reading...[0m[0m
+[0m[1mmodule.analytics_vm.data.yandex_compute_image.my_image: Reading...[0m[0m
+[0m[1mmodule.marketing_vm.data.yandex_compute_image.my_image: Read complete after 1s [id=fd8o398rvk3hj13srsom][0m
+[0m[1mmodule.analytics_vm.data.yandex_compute_image.my_image: Read complete after 1s [id=fd8o398rvk3hj13srsom][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.analytics_vm.yandex_compute_instance.vm[0][0m will be created
+[0m  [32m+[0m[0m resource "yandex_compute_instance" "vm" {
+      [32m+[0m[0m allow_stopping_for_update = true
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m description               = "TODO: description; {{terraform yyy managed}}"
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m fqdn                      = (known after apply)
+      [32m+[0m[0m gpu_cluster_id            = (known after apply)
+      [32m+[0m[0m hardware_generation       = (known after apply)
+      [32m+[0m[0m hostname                  = "analytics-analytics-vm-0"
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m labels                    = {
+          [32m+[0m[0m "owner"   = "m.baryshkov"
+          [32m+[0m[0m "project" = "analytics"
+        }
+      [32m+[0m[0m maintenance_grace_period  = (known after apply)
+      [32m+[0m[0m maintenance_policy        = (known after apply)
+      [32m+[0m[0m metadata                  = {
+          [32m+[0m[0m "serial-port-enable" = "1"
+          [32m+[0m[0m "user-data"          = <<-EOT
+                #cloud-config
+                
+                users:
+                  - name: ubuntu
+                    shell: /bin/bash
+                    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+                    groups: users,admin,sudo
+                    ssh_authorized_keys:
+                      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5fK+g2KVk8M7DcnxENYKsmnx4J4ryLHjCJeMwjf3fZ m.baryshkov@mail.ru
+                
+                package_update: true
+                package_upgrade: false
+                packages:
+                  - vim
+                  - nginx
+                
+                runcmd:
+                  - systemctl enable nginx
+                  - systemctl start nginx
+            EOT
+        }
+      [32m+[0m[0m name                      = "analytics-analytics-vm-0"
+      [32m+[0m[0m network_acceleration_type = "standard"
+      [32m+[0m[0m platform_id               = "standard-v1"
+      [32m+[0m[0m service_account_id        = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m zone                      = "ru-central1-a"
+
+      [32m+[0m[0m boot_disk {
+          [32m+[0m[0m auto_delete = true
+          [32m+[0m[0m device_name = (known after apply)
+          [32m+[0m[0m disk_id     = (known after apply)
+          [32m+[0m[0m mode        = (known after apply)
+
+          [32m+[0m[0m initialize_params {
+              [32m+[0m[0m block_size  = (known after apply)
+              [32m+[0m[0m description = (known after apply)
+              [32m+[0m[0m image_id    = "fd8o398rvk3hj13srsom"
+              [32m+[0m[0m name        = (known after apply)
+              [32m+[0m[0m size        = 10
+              [32m+[0m[0m snapshot_id = (known after apply)
+              [32m+[0m[0m type        = "network-hdd"
+            }
+        }
+
+      [32m+[0m[0m network_interface {
+          [32m+[0m[0m index          = (known after apply)
+          [32m+[0m[0m ip_address     = (known after apply)
+          [32m+[0m[0m ipv4           = true
+          [32m+[0m[0m ipv6           = (known after apply)
+          [32m+[0m[0m ipv6_address   = (known after apply)
+          [32m+[0m[0m mac_address    = (known after apply)
+          [32m+[0m[0m nat            = true
+          [32m+[0m[0m nat_ip_address = (known after apply)
+          [32m+[0m[0m nat_ip_version = (known after apply)
+          [32m+[0m[0m subnet_id      = (known after apply)
+        }
+
+      [32m+[0m[0m resources {
+          [32m+[0m[0m core_fraction = 5
+          [32m+[0m[0m cores         = 2
+          [32m+[0m[0m memory        = 1
+        }
+
+      [32m+[0m[0m scheduling_policy {
+          [32m+[0m[0m preemptible = true
+        }
+    }
+
+[1m  # module.marketing_vm.yandex_compute_instance.vm[0][0m will be created
+[0m  [32m+[0m[0m resource "yandex_compute_instance" "vm" {
+      [32m+[0m[0m allow_stopping_for_update = true
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m description               = "TODO: description; {{terraform yyy managed}}"
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m fqdn                      = (known after apply)
+      [32m+[0m[0m gpu_cluster_id            = (known after apply)
+      [32m+[0m[0m hardware_generation       = (known after apply)
+      [32m+[0m[0m hostname                  = "marketing-marketing-vm-0"
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m labels                    = {
+          [32m+[0m[0m "owner"   = "m.baryshkov"
+          [32m+[0m[0m "project" = "marketing"
+        }
+      [32m+[0m[0m maintenance_grace_period  = (known after apply)
+      [32m+[0m[0m maintenance_policy        = (known after apply)
+      [32m+[0m[0m metadata                  = {
+          [32m+[0m[0m "serial-port-enable" = "1"
+          [32m+[0m[0m "user-data"          = <<-EOT
+                #cloud-config
+                
+                users:
+                  - name: ubuntu
+                    shell: /bin/bash
+                    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+                    groups: users,admin,sudo
+                    ssh_authorized_keys:
+                      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5fK+g2KVk8M7DcnxENYKsmnx4J4ryLHjCJeMwjf3fZ m.baryshkov@mail.ru
+                
+                package_update: true
+                package_upgrade: false
+                packages:
+                  - vim
+                  - nginx
+                
+                runcmd:
+                  - systemctl enable nginx
+                  - systemctl start nginx
+            EOT
+        }
+      [32m+[0m[0m name                      = "marketing-marketing-vm-0"
+      [32m+[0m[0m network_acceleration_type = "standard"
+      [32m+[0m[0m platform_id               = "standard-v1"
+      [32m+[0m[0m service_account_id        = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m zone                      = "ru-central1-a"
+
+      [32m+[0m[0m boot_disk {
+          [32m+[0m[0m auto_delete = true
+          [32m+[0m[0m device_name = (known after apply)
+          [32m+[0m[0m disk_id     = (known after apply)
+          [32m+[0m[0m mode        = (known after apply)
+
+          [32m+[0m[0m initialize_params {
+              [32m+[0m[0m block_size  = (known after apply)
+              [32m+[0m[0m description = (known after apply)
+              [32m+[0m[0m image_id    = "fd8o398rvk3hj13srsom"
+              [32m+[0m[0m name        = (known after apply)
+              [32m+[0m[0m size        = 10
+              [32m+[0m[0m snapshot_id = (known after apply)
+              [32m+[0m[0m type        = "network-hdd"
+            }
+        }
+
+      [32m+[0m[0m network_interface {
+          [32m+[0m[0m index          = (known after apply)
+          [32m+[0m[0m ip_address     = (known after apply)
+          [32m+[0m[0m ipv4           = true
+          [32m+[0m[0m ipv6           = (known after apply)
+          [32m+[0m[0m ipv6_address   = (known after apply)
+          [32m+[0m[0m mac_address    = (known after apply)
+          [32m+[0m[0m nat            = true
+          [32m+[0m[0m nat_ip_address = (known after apply)
+          [32m+[0m[0m nat_ip_version = (known after apply)
+          [32m+[0m[0m subnet_id      = (known after apply)
+        }
+
+      [32m+[0m[0m resources {
+          [32m+[0m[0m core_fraction = 5
+          [32m+[0m[0m cores         = 2
+          [32m+[0m[0m memory        = 1
+        }
+
+      [32m+[0m[0m scheduling_policy {
+          [32m+[0m[0m preemptible = true
+        }
+    }
+
+[1m  # module.vpc_dev.yandex_vpc_network.this[0m will be created
+[0m  [32m+[0m[0m resource "yandex_vpc_network" "this" {
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m default_security_group_id = (known after apply)
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m labels                    = (known after apply)
+      [32m+[0m[0m name                      = "develop"
+      [32m+[0m[0m subnet_ids                = (known after apply)
+    }
+
+[1m  # module.vpc_dev.yandex_vpc_subnet.this[0m will be created
+[0m  [32m+[0m[0m resource "yandex_vpc_subnet" "this" {
+      [32m+[0m[0m created_at     = (known after apply)
+      [32m+[0m[0m folder_id      = (known after apply)
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m labels         = (known after apply)
+      [32m+[0m[0m name           = "develop-subnet"
+      [32m+[0m[0m network_id     = (known after apply)
+      [32m+[0m[0m v4_cidr_blocks = [
+          [32m+[0m[0m "10.0.1.0/24",
+        ]
+      [32m+[0m[0m v6_cidr_blocks = (known after apply)
+      [32m+[0m[0m zone           = "ru-central1-a"
+    }
+
+[1mPlan:[0m 4 to add, 0 to change, 0 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m analytics_vm_fqdn      = [
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m analytics_vm_public_ip = (known after apply)
+  [32m+[0m[0m marketing_vm_fqdn      = [
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m marketing_vm_public_ip = (known after apply)
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
