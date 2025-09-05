@@ -37,6 +37,11 @@
 
 ## Решение 1
 ✔ Создана VPC
+```
+resource "yandex_vpc_network" "main" {
+  name = var.vpc_name
+}
+```
 ![img1](img/img1.png)
 ✅ Развернута с помощью Terraform, имя задаётся через переменную.
 
