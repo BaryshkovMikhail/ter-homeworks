@@ -5,11 +5,8 @@ resource "yandex_lockbox_secret" "db_password" {
 resource "yandex_lockbox_secret_version" "db_password" {
   secret_id = yandex_lockbox_secret.db_password.id
   entries {
-    key   = "password"
-    value = var.db_password
+    key        = "password"
+    text_value = var.db_password
   }
 }
 
-data "yandex_lockbox_secret_version" "db_password" {
-  secret_id = yandex_lockbox_secret.db_password.id
-}

@@ -1,0 +1,6 @@
+=== IP-адреса инфраструктуры ===
+ВМ (внешний IP): 158.160.50.127
+ВМ (внутренний IP): 10.0.1.27
+MySQL (внутренний IP): rc1a-tjoveipfs2o2a0mr.mdb.yandexcloud.net
+Container Registry ID: crpfo4dc2apluf4cou4k
+

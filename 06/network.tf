@@ -1,9 +1,7 @@
-# VPC
 resource "yandex_vpc_network" "main" {
   name = var.vpc_name
 }
 
-# Подсеть
 resource "yandex_vpc_subnet" "main" {
   name           = "${var.vpc_name}-subnet"
   zone           = var.default_zone

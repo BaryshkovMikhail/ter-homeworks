@@ -22,3 +22,4 @@ tfplan
 *.pem
 *.pub
 .terraform/
+backend-config.hcl
