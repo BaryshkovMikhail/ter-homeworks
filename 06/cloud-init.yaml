@@ -7,12 +7,18 @@ packages:
   - jq
 
 runcmd:
-  - usermod -aG docker ubuntu
-  - systemctl enable docker
+  # Установка Yandex Cloud CLI
+  - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+  - source /home/ubuntu/.bashrc
 
-  # Установка Docker Compose
-  - curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-  - chmod +x /usr/local/bin/docker-compose
+  # Настройка yc через IAM-токен
+  - yc config set token ${iam_token}
+  - yc config set cloud-id ${cloud_id}
+  - yc config set folder-id ${folder_id}
+  - yc config set compute-default-zone ru-central1-a
+
+  # Авторизация в Container Registry
+  - yc container registry configure-docker cr.yandex/${registry_id}
 
   # Создание директории
   - mkdir -p /home/ubuntu/app
@@ -41,11 +47,8 @@ runcmd:
   - sed -i "s|\${db_user}|${db_user}|g" /home/ubuntu/app/docker-compose.yml
   - sed -i "s|\${db_name}|${db_name}|g" /home/ubuntu/app/docker-compose.yml
 
-  # Авторизация в Container Registry
-  - sudo -u ubuntu bash -c 'yc container registry configure-docker --registry-id ${registry_id}'
-
-  # Запуск приложения
+  # Проверка и запуск
   - cd /home/ubuntu/app && docker-compose up -d
 
-  # Перезапуск Docker (на всякий случай)
+  # Перезапуск Docker
   - systemctl restart docker

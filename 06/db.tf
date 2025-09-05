@@ -1,3 +1,4 @@
+# 1. Кластер БД (без указания базы данных)
 resource "yandex_mdb_mysql_cluster" "db" {
   name        = "mysql-cluster"
   environment = "PRODUCTION"
@@ -14,19 +15,21 @@ resource "yandex_mdb_mysql_cluster" "db" {
     disk_type_id       = "network-ssd"
     disk_size          = 20
   }
+}
 
-  database {
-    name = var.db_name
-  }
+# 2. Отдельно создаем базу данных
+resource "yandex_mdb_mysql_database" "db" {
+  cluster_id = yandex_mdb_mysql_cluster.db.id
+  name       = var.db_name
 }
 
 resource "yandex_mdb_mysql_user" "db_user" {
   cluster_id = yandex_mdb_mysql_cluster.db.id
   name       = var.db_user
-  password   = var.db_password
+  password   = var.db_password  # или из LockBox, если нужно
 
   permission {
-    database_name = var.db_name
+    database_name = yandex_mdb_mysql_database.db.name
     roles         = ["ALL"]
   }
 }

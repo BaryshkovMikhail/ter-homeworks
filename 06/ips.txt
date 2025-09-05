@@ -1,6 +1,20 @@
-=== IP-адреса инфраструктуры ===
-ВМ (внешний IP): 158.160.50.127
-ВМ (внутренний IP): 10.0.1.27
-MySQL (внутренний IP): rc1a-tjoveipfs2o2a0mr.mdb.yandexcloud.net
-Container Registry ID: crpfo4dc2apluf4cou4k
+# inventory.tpl
 
+=== IP-адреса и ресурсы инфраструктуры ===
+
+[Виртуальная машина]
+name = web-app-vm
+external_ip = 89.169.153.14
+internal_ip = 10.0.1.28
+fqdn = fhmue2bo6oaqeb14hm0j.auto.internal
+
+[База данных MySQL]
+host_fqdn = rc1a-485ll9bue577bbeg.mdb.yandexcloud.net
+internal_ip = rc1a-485ll9bue577bbeg.mdb.yandexcloud.net
+
+[Container Registry]
+registry_id = crpfo4dc2apluf4cou4k
+
+[Сеть]
+vpc_name = app-network
+subnet_cidr = 10.0.1.0/24

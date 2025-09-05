@@ -3,6 +3,12 @@ variable "cloud_id" {
   description = "Идентификатор облака"
 }
 
+variable "iam_token" {
+  type        = string
+  description = "IAM-токен для временного доступа"
+  sensitive   = true
+}
+
 variable "folder_id" {
   type        = string
   description = "Идентификатор каталога"

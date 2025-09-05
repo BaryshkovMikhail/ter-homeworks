@@ -8,6 +8,9 @@ data "template_file" "cloud_init" {
     db_host     = yandex_mdb_mysql_cluster.db.host[0].fqdn
     db_user     = var.db_user
     db_name     = var.db_name
+    cloud_id    = var.cloud_id
+    folder_id   = var.folder_id
+    iam_token   = var.iam_token
   }
 }
 
@@ -37,6 +40,14 @@ resource "yandex_compute_instance" "app_vm" {
 
   metadata = {
     ssh-keys = "ubuntu:${local.ssh_public_key}"
-    user-data   = data.template_file.cloud_init.rendered
+    user-data = templatefile("cloud-init.yaml", {
+      registry_id = yandex_container_registry.main.id
+      db_host     = yandex_mdb_mysql_cluster.db.host[0].fqdn
+      db_user     = var.db_user
+      db_name     = var.db_name
+      cloud_id    = var.cloud_id
+      folder_id   = var.folder_id
+      iam_token   = var.iam_token
+    })
   }
 }
