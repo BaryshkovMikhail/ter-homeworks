@@ -96,6 +96,7 @@ resource "yandex_vpc_security_group" "app" {
 
 ![img4](img/img4.png)
 ![img5](img/img5.png)
+
 ✅ Группа безопасности привязана к ВМ.
 
 
@@ -235,9 +236,25 @@ resource "yandex_lockbox_secret_version" "db_password" {
   }
 }
 ```
+![img9](img/img9.png)
 
 ✔ Сервисному аккаунту назначены роли: 
 
     lockbox.editor
     lockbox.payloadViewer
     kms.keys.encrypterDecrypter
+
+Блокировака state
+
+![img10](img/img10.png)
+
+Сам  сайт
+
+![img11](img/img11.png)
+
+Не понял почему здесь выдает так, хотя через curl  всё корректно.
+
+![img12](img/img12.png)
+
+Но здесь я так понял этого и не надо.
+
